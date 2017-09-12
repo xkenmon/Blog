@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ArticlePicDAO">
+    
+    
+    <select id="findPicByArticleId" resultType="String">
+        SELECT pic FROM articlepic WHERE articleid = #{_parameter}
+    </select>
+
+    <select id="findNullIdPic" resultType="java.util.ArrayList">
+        SELECT pic FROM articlepic WHERE articleid IS NULL
+    </select>
+
+    <insert id="insertPic">
+        INSERT INTO articlepic (pic, articleid) VALUES (#{array[0]}, #{array[1]})
+    </insert>
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserDAO">
+
+    <resultMap id="UserMap" type="cn.xkenmon.blog.vo.User">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="userName"/>
+        <result column="passwd" jdbcType="VARCHAR" property="passWd"/>
+        <result column="createdate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="email" jdbcType="VARCHAR" property="eMail"/>
+        <result column="qq" jdbcType="VARCHAR" property="qq"/>
+        <result column="isadmin" jdbcType="BOOLEAN" property="isAdmin"/>
+        <result column="islogin" jdbcType="INTEGER" property="isLogin"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+    </resultMap>
+
+    <insert id="createUser" parameterType="cn.xkenmon.blog.vo.User">
+        INSERT INTO user
+        (username, passwd, createdate, phone, email, qq)
+        VALUES
+            (#{userName}, #{passWd}, #{createDate}, #{phone}, #{eMail}, #{qq})
+    </insert>
+
+    <update id="changeAvatarById">
+        UPDATE user SET avatar = #{array[1]} WHERE id = #{array[0]}
+    </update>
+
+    <update id="changeLogStatById">
+        UPDATE user SET islogin = #{array[1]} WHERE id = #{array[0]}
+    </update>
+
+    <select id="findUserById" resultMap="UserMap">
+        SELECT * FROM user WHERE id = #{_parameter}
+    </select>
+
+    <select id="findUserByName" resultMap="UserMap">
+        SELECT * FROM user WHERE username = #{_parameter}
+    </select>
+
+    <select id="findUserByEmail" resultMap="UserMap">
+        SELECT * FROM user WHERE email = #{_parameter}
+    </select>
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- 本配置文件是工名为mvc-dispatcher的DispatcherServlet使用， 提供其相关的Spring MVC配置 -->
+
+    <!-- 启用Spring基于annotation的DI, 使用户可以在Spring MVC中使用Spring的强大功能。 激活 @Required 
+        @Autowired,JSR 250's @PostConstruct, @PreDestroy and @Resource 等标注 -->
+    <context:annotation-config/>
+    <mvc:annotation-driven/>
+    <context:component-scan base-package="cn.xkenmon.blog.control"/>
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+    <mvc:resources mapping="/res/**" location="/res/"/>
+    <mvc:resources mapping="/static/**" location="/static/"/>
+    <mvc:resources mapping="/main.html" location="/WEB-INF/jsp/"/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- set the maximum file size in bytes -->
+        <property name="maxUploadSize" value="50000000"/>
+    </bean>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/manage/**"/>
+            <mvc:exclude-mapping path="/manage/register.do"/>
+            <mvc:exclude-mapping path="/manage/login.do"/>
+            <mvc:exclude-mapping path="/manage/registerCheck"/>
+            <bean class="cn.xkenmon.blog.control.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/static/*/**"/>
+            <mvc:exclude-mapping path="/res/**"/>
+            <mvc:exclude-mapping path="/userImg/**"/>
+            <bean class="cn.xkenmon.blog.control.interceptor.ActionInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+</beans>

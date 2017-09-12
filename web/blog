@@ -1,0 +1,30 @@
+upstream blog{
+	server 119.28.7.42:8080;
+}
+upstream res{
+	server 127.0.0.1:80;
+	server 119.28.7.42:80;
+	server 128.199.207.200:80;
+}
+server {
+	listen 80;
+	server_name *.xkenmon.cn *.bigmeng.top;
+	location / {
+		proxy_pass http://blog;
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	}
+	location /res {
+		proxy_pass http://res;
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	}
+	location /static {
+		proxy_pass http://res;
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	}
+}
