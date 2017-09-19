@@ -52,10 +52,6 @@
 <jsp:useBean id="typeList" scope="request" type="java.util.List"/>
 
 <%
-    //    Article indexArticle = (Article) request.getAttribute("indexArticle");
-//    List<Article> articleList = (List<Article>) request.getAttribute("articleList");
-//    List<String> typeList = (List<String>) request.getAttribute("typeList");
-//    List<Article> popularList = (List<Article>) request.getAttribute("popularList");
     int total = (int) request.getAttribute("total");
     int currentPage = (int) request.getAttribute("page");
 %>
@@ -89,7 +85,7 @@
                         </li>
 
                         <li class="has-dropdown">
-                            <a>排序方式%></a>
+                            <a>排序方式</a>
                             <ul class="dropdown">
                                 <li><a href="${pageContext.request.contextPath}/index.html?sort=click">按点击数</a></li>
                                 <li><a href="${pageContext.request.contextPath}/index.html?sort=createTime">按创建时间</a>
