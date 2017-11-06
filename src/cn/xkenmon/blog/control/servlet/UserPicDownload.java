@@ -1,19 +1,12 @@
 package cn.xkenmon.blog.control.servlet;
 
-import org.apache.commons.io.FileUtils;
+import cn.xkenmon.blog.util.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.regex.Matcher;
@@ -35,7 +28,7 @@ public class UserPicDownload {
         if (matcher.matches()) {
             try {
                 OutputStream out = response.getOutputStream();
-                File pic = new File("/userInfo/pic/" + path + File.separator + fileName);
+                File pic = new File(Config.get("picPath") + File.separator + path + File.separator + fileName);
                 if (!pic.exists()) {
                     logger.debug(pic.getAbsolutePath()+"请求的图片不存在");
                     return;

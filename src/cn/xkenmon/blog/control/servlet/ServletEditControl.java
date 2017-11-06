@@ -8,6 +8,7 @@ import cn.xkenmon.blog.DAO.impl.UserDAOProxy;
 import cn.xkenmon.blog.Throwable.FileFormatMistakenException;
 import cn.xkenmon.blog.Throwable.FileSizeTooLargeException;
 import cn.xkenmon.blog.util.ArticleDeleteUtil;
+import cn.xkenmon.blog.util.Config;
 import cn.xkenmon.blog.util.ImgUploadUtil;
 import cn.xkenmon.blog.vo.Article;
 import cn.xkenmon.blog.vo.User;
@@ -31,12 +32,11 @@ import java.util.List;
 @RequestMapping("/manage")
 public class ServletEditControl {
     private static Logger logger = LoggerFactory.getLogger(ServletEditControl.class);
-    private static final String IMG_PATH = "/userInfo/pic/ArticlePic/";
+    private static final String IMG_PATH = Config.get("picPath");
 
     @RequestMapping("/delete/{id}")
-    public String delete(@PathVariable(value = "id") String id_str, @SessionAttribute User currentUser) {
+    public String delete(@PathVariable(value = "id") int id, @SessionAttribute User currentUser) {
         ArticlesDAO dao = DAOFactory.getInstance();
-        int id = Integer.valueOf(id_str);
 
         Article article = dao.findById(id);
         if (article.getAuthor().equals(currentUser.getUserName())) {
@@ -203,7 +203,6 @@ public class ServletEditControl {
             out.close();
             logger.info("文件过大");
             return null;
-
         } catch (FileFormatMistakenException e) {
             out.println("<script type=\"text/javascript\">");
             out.println("window.parent.CKEDITOR.tools.callFunction(" + callback

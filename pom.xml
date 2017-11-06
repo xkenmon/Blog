@@ -2,9 +2,9 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cn.xkenmon.blog</groupId>
-    <artifactId>Blog</artifactId>
-    <version>1</version>
+    <groupId>cn.xkenmon</groupId>
+    <artifactId>blog</artifactId>
+    <version>1.0</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,6 +19,7 @@
                     <source>1.7</source>
                     <target>1.7</target>
                 </configuration>
+                <version>3.7.0</version>
             </plugin>
         </plugins>
     </build>
