@@ -1,0 +1,4 @@
+{
+  "picPath": "your Pic store path",
+  "log4jLocation":"./src/main/resources/log4j.properties"
+}
