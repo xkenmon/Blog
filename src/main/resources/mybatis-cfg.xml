@@ -21,9 +21,9 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="cn/xkenmon/blog/DAO/mapping/ArticleMapper.xml"/>
-        <mapper resource="cn/xkenmon/blog/DAO/mapping/UserMapper.xml"/>
-        <mapper resource="cn/xkenmon/blog/DAO/mapping/ArticlePicMapper.xml"/>
+        <mapper resource="mapper/ArticleMapper.xml"/>
+        <mapper resource="mapper/UserMapper.xml"/>
+        <mapper resource="mapper/ArticlePicMapper.xml"/>
     </mappers>
 
 

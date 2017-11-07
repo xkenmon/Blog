@@ -1,7 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="cn.xkenmon.blog.vo.Article" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.net.URLEncoder" %>
 <%@ page import="cn.xkenmon.blog.util.TimeUtil" %>
 <%@ page import="cn.xkenmon.blog.vo.User" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -54,8 +51,8 @@
 <jsp:useBean id="articleList" scope="request" type="java.util.List"/>
 <%
     User user = (User) request.getAttribute("user");
-    int total = (int) request.getAttribute("total");
-    int currentPage = (int) request.getAttribute("page");
+    int total = (Integer) request.getAttribute("total");
+    int currentPage = (Integer) request.getAttribute("page");
     String sort = (String) request.getAttribute("sort");
 %>
 

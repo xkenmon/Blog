@@ -13,17 +13,26 @@
     </properties>
 
     <build>
+        <finalName>blog</finalName>
         <plugins>
-<plugin>
-        <groupId>org.apache.tomcat.maven</groupId>
-        <artifactId>tomcat7-maven-plugin</artifactId>
-        <version>2.2</version>
-        <configuration>
-          <port>8080</port>
-          <path>/</path>
-          <uriEncoding>UTF-8</uriEncoding>
-        </configuration>
-      </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <port>8080</port>
+                    <path>/</path>
+                    <uriEncoding>UTF-8</uriEncoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -41,19 +50,19 @@
 
     <dependencies>
 
-	    <dependency>
-		            <groupId>org.glassfish.extras</groupId>
-			            <artifactId>glassfish-embedded-all</artifactId>
-				            <version>3.0</version>
-					            <scope>test</scope>
-						        </dependency>
+        <dependency>
+            <groupId>org.glassfish.extras</groupId>
+            <artifactId>glassfish-embedded-all</artifactId>
+            <version>3.0</version>
+            <scope>test</scope>
+        </dependency>
 
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>3.8.1</version>
-                <scope>test</scope>
-            </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
 
 
         <dependency>
@@ -87,23 +96,23 @@
         </dependency>
         <!--&lt;!&ndash; 日志文件管理包 end &ndash;&gt;-->
         <!-- web begin -->
-	<dependency>
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
-	    <scope>provided</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-	<dependency> 
-		   <groupId>javax.servlet.jsp</groupId> 
-		      <artifactId>jsp-api</artifactId> 
-		         <version>2.1</version> 
-			    <scope>provided</scope>
-		    </dependency>
+        <dependency> 
+            <groupId>javax.servlet.jsp</groupId> 
+            <artifactId>jsp-api</artifactId> 
+            <version>2.1</version> 
+            <scope>provided</scope>
+        </dependency>
         <!-- web end -->
         <!-- spring MVC -->
         <dependency>

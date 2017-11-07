@@ -1,3 +1,4 @@
 {
-  "picPath": "/mnt/study/pic"
+  "picPath": "/mnt/study/pic",
+  "log4jLocation":"./src/main/resources/log4j.properties"
 }

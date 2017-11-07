@@ -1,17 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="cn.xkenmon.blog.vo.Article" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.net.URLEncoder" %>
-<%@ page import="cn.xkenmon.blog.util.TimeUtil" %><%--
-  Created by IntelliJ IDEA.
-  User: mxk94
-  Date: 2017/8/1
-  Time: 上午 11:43
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="cn.xkenmon.blog.util.TimeUtil" pageEncoding="UTF-8" %>
 <!DOCTYPE HTML>
-
 <html>
 <script>
     if (window.name === "ref"){
@@ -30,7 +19,7 @@
 
 
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i|Roboto+Mono" rel="stylesheet">
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/res/favicon.ico"/>
+
     <!-- Animate.css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/animate.css">
     <!-- Icomoon Icon Fonts-->
@@ -50,22 +39,19 @@
     <!--[if lt IE 9]>
     <script src="/res/js/respond.min.js"></script>
     <![endif]-->
-
 </head>
-<body>
-
 <jsp:useBean id="popularList" scope="request" type="java.util.List"/>
 <jsp:useBean id="typeList" scope="request" type="java.util.List"/>
-<jsp:useBean id="articleList" scope="request" type="java.util.List"/>
-<%
-//    List<Article> articleList = (List<Article>) request.getAttribute("articleList");
-//    List<String> typeList = (List<String>) request.getAttribute("typeList");
-//    List<Article> popularList = (List<Article>) request.getAttribute("popularList");
-    String category = (String) request.getAttribute("type");
-    int total = (int) request.getAttribute("total");
-    int currentPage = (int) request.getAttribute("page");
-    String sort = (String) request.getAttribute("sort");
-%>
+<jsp:useBean id="relatedList" scope="request" type="java.util.List"/>
+<jsp:useBean id="article" scope="request" type="cn.xkenmon.blog.vo.Article"/>
+
+<script>
+    function del_ask() {
+        return confirm("确定要删除吗?(lll￢ω￢)");
+    }
+</script>
+
+<body>
 
 <div class="gtco-loader"></div>
 
@@ -94,15 +80,6 @@
                             </ul>
                         </li>
 
-                        <%--<li><a href="ServletCategoryControl.html">Business</a></li>--%>
-                        <%--<li><a href="ServletCategoryControl.html">Travel</a></li>--%>
-                        <li class="has-dropdown">
-                            <a>排序方式</a>
-                            <ul class="dropdown">
-                                <li><a href="/category/${type}?sort=click">按点击数</a></li>
-                                <li><a href="/category/${type}?sort=createTime">按创建时间</a></li>
-                            </ul>
-                        </li>
                         <li class="has-dropdown">
                             <%--&nbsp;--%>
                             <c:if test="${empty currentUser}">
@@ -125,7 +102,6 @@
                                 </ul>
                                 </c:if>
                         </li>
-                        <%--<li><a href="ServletCategoryControl.html">Culture</a></li>--%>
                     </ul>
                 </div>
             </div>
@@ -133,8 +109,7 @@
         </div>
     </nav>
 
-    <!-- 主页文章 -->
-    <header id="gtco-header" class="gtco-cover" role="banner" style="background-image:url(/res/images/img_1.jpg);"
+    <header id="gtco-header" class="gtco-cover" role="banner" style="background-image:url(/res/images/img_4.jpg);"
             data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
@@ -142,90 +117,73 @@
                 <div class="col-md-7 text-left">
                     <div class="display-t">
                         <div class="display-tc animate-box" data-animate-effect="fadeInUp">
-                            <%--<span class="date-post"><%=article.getDate()%></span>--%>
-                            <h1 class="mb30">分类：${type}
-                            </h1>
+                            <span class="date-post"><%=TimeUtil.getShortTime(article.getDate())%></span>
+                            <h1 class="mb30"><a ><%=article.getTitle()%>
+                            </a></h1>
+                            <p>by <a href="/profile/${article.author}" class="text-link"><%=article.getAuthor()%>
+                            </a></p>
+                            <p>点击数：<%=article.getReadCount()%>
+                            </p>
+                            <c:if test="${(not empty currentUser) and (article.author eq currentUser.userName)}">
+                                <a class="text-link" href="${pageContext.request.contextPath}/manage/edit/${article.id}">[编辑文章]</a>
+                                <a class="text-link" onclick="return del_ask()" href="${pageContext.request.contextPath}/manage/delete/${article.id}">[删除文章]</a>
+                            </c:if>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-    <div class="copyrights">Powered By <a href="http://www.xkenmon.cn/" title="BigMeng">BigMeng</a></div>
 
-    <!-- 前十篇文章 -->
-    <div id="gtco-main">
+    <div id="gtco-maine">
         <div class="container">
             <div class="row row-pb-md">
                 <div class="col-md-12">
-                    <ul id="gtco-post-list">
-                            <c:if test="${articleList.size() eq 0}">
-                                <h2>Don't have result.</h2>
-                            </c:if>
-
-                            <c:forEach var="article" items="${articleList}">
-                                
-                                    <li class="one-third entry animate-box" data-animate-effect="fadeIn">
-                                        <a href="/Article/${article.id}">
-                                            <c:if test="${empty article.cover}">
-                                                <div class="entry-img"
-                                                     style="background-image: url(/res/images/img_5.jpg)"></div>
-                                            </c:if>
-                                            <c:if test="${not empty article.cover}">
-                                                <div class="entry-img"
-                                                     style="background-image: url(${pageContext.request.contextPath}/userImg/ArticlePic?fileName=${article.cover})"></div>
-                                            </c:if>
-                                            <div class="entry-desc">
-                                                <h3>${article.title}</h3>
-                                                <p>${article.summary}</p>
-                                            </div>
-                                        </a>
-                                        <a href="${pageContext.request.contextPath}/profile/${article.author}}" class="post-meta">By ${article.author} <span class="date-posted">${TimeUtil.getShortTime(article.date)}</span></a>
-                                    </li>
-                                
-                            </c:forEach>
-                    </ul>
+                    <article class="mt-negative">
+                        <div class="text-left content-article">
+                            <!--文本-->
+                            <div class="row">
+                                <div class="col-lg-8 cp-r animate-box">
+                                    <%=article.getContent()%>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12 text-center">
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination">
-                            <li>
-                                <a href="/category/${type}page=1&sort=<%=sort%>" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <%
-                                int allPage = total == 9 ? 1 : total / 9 + 1;
-                                int pageStart = currentPage - 2;
-                                int pageEnd = currentPage + 2;
-                                if (pageStart < 1) {
-                                    pageEnd = pageEnd - pageStart;
-                                    pageStart = 1;
-                                }
-                                if (pageEnd > allPage) {
-                                    pageEnd = allPage;
-                                }
-                                if (pageEnd == 0) {
-                                    pageEnd = 1;
-                                }
-                            %>
-                            <%
-                                for (int i = pageStart; i <= pageEnd; i++) {
-                                    if (i == currentPage) {
-                                        out.write("<li class=\"active\"><a href=\"/category/" + URLEncoder.encode(category, "utf-8") + "?page=" + i + "&sort=" + sort + "\">" + i + "</a></li>");
-                                    } else
-                                        out.write("<li><a href=\"/category/" + URLEncoder.encode(category, "utf-8") + "?page=" + i + "&sort=" + sort + "\">" + i + "</a></li>");
-                                }
-                            %>
-                            <li>
-                                <a href="/category/${type}?page=<%=allPage%>&sort=<%=sort%>" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                <div class="col-md-12">
+                    <h2 class="related-title animate-box"><c:if test="${relatedList.size() ne 1}">Related Posts</c:if></h2>
+                </div>
+            </div>
+            <div class="row row-pb-md">
+                <div class="col-md-12">
+                    <ul id="gtco-post-list">
+                        <!--相关文章-->
+
+                            <c:forEach items="${relatedList}" var="related">
+                                <c:if test="${related.id ne article.id}">
+                                    <li class="one-third animate-box entry" data-animate-effect="fadeIn">
+                                        <a href="/Article/${related.id}">
+                                            <c:if test="${empty related.cover}">
+                                                <div class="entry-img"
+                                                     style="background-image: url(/res/images/img_5.jpg)"></div>
+                                            </c:if>
+                                            <c:if test="${not empty related.cover}">
+                                                <div class="entry-img"
+                                                     style="background-image: url(${pageContext.request.contextPath}/userImg/ArticlePic?fileName=${related.cover})"></div>
+                                            </c:if>
+                                            <div class="entry-desc">
+                                                <h3>${related.title}</h3>
+                                                <p>${related.summary}</p>
+                                            </div>
+                                        </a>
+                                        <a href="${pageContext.request.contextPath}/profile/${related.author}" class="post-meta">By ${related.author} <span
+                                                class="date-posted">${TimeUtil.getShortTime(related.date)}</span></a>
+                                    </li>
+                                </c:if>
+                            </c:forEach>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -238,23 +196,7 @@
                 <div class="col-md-12">
                     <h3 class="footer-heading">Most Popular</h3>
                 </div>
-
-                <%--<%--%>
-                <%--for (Article popular : popularList) {--%>
-                <%--out.write("<div class=\"col-md-4\">");--%>
-                <%--out.write("<div class=\"post-entry\">");--%>
-                <%--out.write("<div class=\"post-img\">");--%>
-                <%--out.write("<a href=\"/Article/" + popular.getId() + "\"><img src=\"/res/images/img_1.usernamejpg\" class=\"img-responsive\" alt=\"Most Popular\"></a>");--%>
-                <%--out.write("</div>");--%>
-                <%--out.write("<div class=\"post-copy\">");--%>
-                <%--out.write("<h4><a href=\"/Article/" + popular.getId() + "\">" + popular.getTitle() + "</a></h4>");--%>
-                <%--out.write("<a href=\"/Article/" + popular.getId() + " \" class=\"post-meta\"><span class=\"date-posted\">" + "点击数：" + popular.getReadCount() + "</span></a>");--%>
-                <%--out.write("</div>");--%>
-                <%--out.write("</div>");--%>
-                <%--out.write("</div>");--%>
-                <%--}--%>
-                <%--out.flush();--%>
-                <%--%>--%>
+                <!--最流行-->
 
                 <c:forEach var="popular" items="${popularList}">
                     <div class="col-md-4">
@@ -320,5 +262,4 @@
 
 </body>
 </html>
-
 

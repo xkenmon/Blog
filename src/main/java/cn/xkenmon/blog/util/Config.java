@@ -21,7 +21,7 @@ public class Config {
         if (userDir != null && !userDir.equals("")) {
             File cfgFile = new File(userDir, "config.json");
             if (cfgFile.exists()) {
-                log.info("loading config file : " + cfgFile.getAbsolutePath());
+                log.info("***loading config file : " + cfgFile.getAbsolutePath());
                 String cfgStr;
                 try {
                     cfgStr = FileUtils.readFileToString(cfgFile, "utf8");
@@ -32,10 +32,10 @@ public class Config {
                     log.error(cfgFile.getAbsolutePath() + e);
                 }
             } else {
-                log.info("can't find config file.");
+                log.warn("***can't find config file: "+cfgFile.getAbsolutePath());
             }
         } else {
-            log.error("Can not get user.dir");
+            log.error("***Can not get user.dir");
         }
     }
 
@@ -79,7 +79,7 @@ public class Config {
                     cfgJson = JSONObject.fromObject(FileUtils.readFileToString(cfgFile, "utf8"));
                 } catch (IOException e) {
                     e.printStackTrace();
-                    log.warn("Flush config file failed : " + e);
+                    log.warn("***Flush config file failed : " + e);
                 }
                 try {
                     Thread.sleep(1000 * 60);

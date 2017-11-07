@@ -1,13 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: mxk94
-  Date: 2017/8/11
-  Time: 上午 09:11
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page pageEncoding="UTF-8" %>
 <!DOCTYPE html>

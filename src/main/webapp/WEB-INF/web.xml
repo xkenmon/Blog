@@ -48,10 +48,10 @@
     <servlet>
         <servlet-name>Log4JInitServlet</servlet-name>
         <servlet-class>cn.xkenmon.blog.control.servlet.Log4jInit</servlet-class>
-        <init-param>
-            <param-name>log4j-properties-location</param-name>
-            <param-value>/WEB-INF/classes/log4j.properties</param-value>
-        </init-param>
+        <!--<init-param>-->
+            <!--<param-name>log4j-properties-location</param-name>-->
+            <!--<param-value>log4j.properties</param-value>-->
+        <!--</init-param>-->
         <load-on-startup>1</load-on-startup>
     </servlet>
 </web-app>
