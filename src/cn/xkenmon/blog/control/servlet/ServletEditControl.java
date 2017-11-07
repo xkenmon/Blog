@@ -32,7 +32,7 @@ import java.util.List;
 @RequestMapping("/manage")
 public class ServletEditControl {
     private static Logger logger = LoggerFactory.getLogger(ServletEditControl.class);
-    private static final String IMG_PATH = Config.get("picPath");
+//    private static final String IMG_PATH = Config.get("picPath");
 
     @RequestMapping("/delete/{id}")
     public String delete(@PathVariable(value = "id") int id, @SessionAttribute User currentUser) {
@@ -40,7 +40,7 @@ public class ServletEditControl {
 
         Article article = dao.findById(id);
         if (article.getAuthor().equals(currentUser.getUserName())) {
-            ArticleDeleteUtil.delete(IMG_PATH, article);
+            ArticleDeleteUtil.delete(Config.get("picPath"), article);
             dao.deleteById(id);
             logger.info("删除文章：" + article.getTitle() + "--id:" + article.getId());
         }
@@ -109,7 +109,7 @@ public class ServletEditControl {
             }
             String filename;
             try {
-                filename = ImgUploadUtil.upload(coverImg, IMG_PATH, 5000);
+                filename = ImgUploadUtil.upload(coverImg, Config.get("picPath"), 5000);
             } catch (FileSizeTooLargeException e) {
                 e.printStackTrace();
                 assert out != null;
@@ -185,7 +185,7 @@ public class ServletEditControl {
 
         String fileName;
         try {
-            fileName = ImgUploadUtil.upload(upload, IMG_PATH, 5000);
+            fileName = ImgUploadUtil.upload(upload, Config.get("picPath"), 5000);
 //            在Session层面上设置文章添加图片的名称
             HttpSession session = request.getSession();
             ArrayList list = (ArrayList) session.getAttribute("uploadPic");
