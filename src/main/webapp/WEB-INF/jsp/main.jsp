@@ -122,7 +122,7 @@
     </nav>
 
     <!-- 主页文章 -->
-    <header id="gtco-header" class="gtco-cover" role="banner" style="background-image:url(/res/images/img_1.jpg);"
+    <header id="gtco-header" class="gtco-cover" role="banner" style="background-image:url(${pageContext.request.contextPath}/res/images/img_1.jpg);"
             data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
@@ -154,7 +154,8 @@
                                     <a href="Article/${article.id}">
                                         <c:if test="${empty article.cover}">
                                             <div class="entry-img"
-                                                 style="background-image: url(/res/images/img_5.jpg)"></div>
+                                                 style="background-image: url(${pageContext.request.contextPath}/res/images/img_5.jpg);"
+                                            ></div>
                                         </c:if>
                                         <c:if test="${not empty article.cover}">
                                             <div class="entry-img"

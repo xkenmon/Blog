@@ -37,7 +37,7 @@
     <script src="${pageContext.request.contextPath}/res/js/modernizr-2.6.2.min.js"></script>
     <!-- FOR IE9 below -->
     <!--[if lt IE 9]>
-    <script src="/res/js/respond.min.js"></script>
+    <script src="${pageContext.request.contextPath}/res/js/respond.min.js"></script>
     <![endif]-->
 </head>
 <jsp:useBean id="popularList" scope="request" type="java.util.List"/>
@@ -96,7 +96,7 @@
                                 </a>
                                 <c:if test="${not empty currentUser}">
                                 <ul class="dropdown">
-                                    <li><a href="/profile/${currentUser.userName}">个人主页</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/profile/${currentUser.userName}">个人主页</a></li>
                                     <li><a href="${pageContext.request.contextPath}/manage/edit">写文章</a></li>
                                     <li><a href="${pageContext.request.contextPath}/manage/logout.do">注销登录</a></li>
                                 </ul>
@@ -120,7 +120,7 @@
                             <span class="date-post"><%=TimeUtil.getShortTime(article.getDate())%></span>
                             <h1 class="mb30"><a ><%=article.getTitle()%>
                             </a></h1>
-                            <p>by <a href="/profile/${article.author}" class="text-link"><%=article.getAuthor()%>
+                            <p>by <a href="${pageContext.request.contextPath}/profile/${article.author}" class="text-link"><%=article.getAuthor()%>
                             </a></p>
                             <p>点击数：<%=article.getReadCount()%>
                             </p>
@@ -164,10 +164,10 @@
                             <c:forEach items="${relatedList}" var="related">
                                 <c:if test="${related.id ne article.id}">
                                     <li class="one-third animate-box entry" data-animate-effect="fadeIn">
-                                        <a href="/Article/${related.id}">
+                                        <a href="${pageContext.request.contextPath}/Article/${related.id}">
                                             <c:if test="${empty related.cover}">
                                                 <div class="entry-img"
-                                                     style="background-image: url(/res/images/img_5.jpg)"></div>
+                                                     style="background-image: url(${pageContext.request.contextPath}/res/images/img_5.jpg)"></div>
                                             </c:if>
                                             <c:if test="${not empty related.cover}">
                                                 <div class="entry-img"
@@ -202,13 +202,13 @@
                     <div class="col-md-4">
                         <div class="post-entry">
                             <div class="post-img">
-                                <a href="/Article/${popular.id}"><img
+                                <a href="${pageContext.request.contextPath}/Article/${popular.id}"><img
                                         src="${pageContext.request.contextPath}/userImg/ArticlePic?fileName=${popular.cover}"
                                         class="img-responsive" alt="Most Popular"></a>
                             </div>
                             <div class="post-copy">
-                                <h4><a href="/Article/${popular.id}">${popular.title}</a></h4>
-                                <a href="/Article/${popular.id}" class="post-meta"><span
+                                <h4><a href="${pageContext.request.contextPath}/Article/${popular.id}">${popular.title}</a></h4>
+                                <a href="${pageContext.request.contextPath}/Article/${popular.id}" class="post-meta"><span
                                         class="date-posted">点击数：${popular.readCount}</span> </a>
                             </div>
                         </div>

@@ -30,7 +30,7 @@
 <div class="reg-w3">
     <div class="w3layouts-main">
         <h2>Register Now</h2>
-        <form action="/manage/register.do" method="post">
+        <form action="../manage/register.do" method="post">
             <input id="userName" type="text" class="ggg" name="userName" placeholder="NAME" required="">
             <div id="namePrompt"></div>
             <input id="eMail" type="email" class="ggg" name="eMail" placeholder="E-MAIL" required="">
@@ -52,7 +52,7 @@
             var name = ($("#userName").val());
             if (name !== "")
                 $.ajax({
-                    url: "/manage/registerCheck",
+                    url: "../manage/registerCheck",
                     type: "POST",
                     data: "name=" + name,
                     success: function (msg) {
@@ -65,7 +65,7 @@
             var eMail = ($("#eMail").val());
             if (eMail !== "")
                 $.ajax({
-                    url: "/manage/registerCheck",
+                    url: "../manage/registerCheck",
                     type: "POST",
                     data: "email=" + eMail,
                     success: function (msg) {
@@ -85,6 +85,6 @@
 <script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
 <script src="js/jquery.scrollTo.js"></script>
 <!--love.js-->
-<script src="/static/js/love.js"></script>
+<script src="js/love.js"></script>
 </body>
 </html>

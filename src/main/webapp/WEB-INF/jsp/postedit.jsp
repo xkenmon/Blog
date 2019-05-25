@@ -49,7 +49,7 @@
             }
         }
         if (typeof imgDOM !== "undefined") {
-            imgDOM.src = "/ping?sid=" + new Date().getTime();    //防止缓存
+            imgDOM.src = "${pageContext.request.contextPath}/ping?sid=" + new Date().getTime();    //防止缓存
             setTimeout("autoRefresh(" + seconds + ")", period);
         }
     }
@@ -169,7 +169,7 @@
 <script src="${pageContext.request.contextPath}/res/edit/js/jquery.slimscroll.js"></script>
 <script src="${pageContext.request.contextPath}/res/edit/js/jquery.nicescroll.js"></script>
 <!--[if lte IE 8]>
-<script language="javascript" type="text/javascript" src="/res/edit/js/flot-chart/excanvas.min.js"></script><![endif]-->
+<script language="javascript" type="text/javascript" src="${pageContext.request.contextPath}/res/edit/js/flot-chart/excanvas.min.js"></script><![endif]-->
 <script src="${pageContext.request.contextPath}/res/edit/js/jquery.scrollTo.js"></script>
 <!--love.js-->
 <script src="${pageContext.request.contextPath}/res/js/love.js"></script>

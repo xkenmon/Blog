@@ -32,6 +32,7 @@ public class Config {
                     log.error(cfgFile.getAbsolutePath() + e);
                 }
             } else {
+                cfgJson = new JSONObject();
                 log.warn("***can't find config file: "+cfgFile.getAbsolutePath());
             }
         } else {

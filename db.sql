@@ -2,7 +2,8 @@
 SQLyog Ultimate v12.09 (64 bit)
 MySQL - 5.7.19-0ubuntu0.16.04.1 : Database - blog
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -118,7 +119,7 @@ CREATE TABLE `user` (
 
 /*Data for the table `user` */
 
-insert  into `user`(`id`,`username`,`passwd`,`createdate`,`phone`,`email`,`qq`,`isadmin`,`islogin`,`avatar`) values (1,'孟祥坤','mxk15235674396','2017-08-12 11:25:51','18835934360','947139299@qq.com','947139299',1,0,NULL);
+insert  into `user`(`id`,`username`,`passwd`,`createdate`,`phone`,`email`,`qq`,`isadmin`,`islogin`,`avatar`) values (1,'孟祥坤','mengxiangkun','2017-08-12 11:25:51','18835934360','947139299@qq.com','947139299',1,0,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

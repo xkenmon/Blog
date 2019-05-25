@@ -34,7 +34,7 @@
     <script src="${pageContext.request.contextPath}/res/js/modernizr-2.6.2.min.js"></script>
     <!-- FOR IE9 below -->
     <!--[if lt IE 9]>
-    <script src="/res/js/respond.min.js"></script>
+    <script src="${pageContext.request.contextPath}/res/js/respond.min.js"></script>
     <![endif]-->
 
 </head>
@@ -71,8 +71,8 @@
                         <li class="has-dropdown">
                             <a>排序方式</a>
                             <ul class="dropdown">
-                                <li><a href="/profile/${user.userName}?sort=click">按点击数</a></li>
-                                <li><a href="/profile/${user.userName}?sort=createTime">按创建时间</a></li>
+                                <li><a href="${pageContext.request.contextPath}/profile/${user.userName}?sort=click">按点击数</a></li>
+                                <li><a href="${pageContext.request.contextPath}/profile/${user.userName}?sort=createTime">按创建时间</a></li>
                             </ul>
                         </li>
                         <li class="has-dropdown">
@@ -91,7 +91,7 @@
                                 </a>
                                 <c:if test="${not empty currentUser}">
                                 <ul class="dropdown">
-                                    <li><a href="/profile/${currentUser.userName}" >个人主页</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/profile/${currentUser.userName}" >个人主页</a></li>
                                     <li><a href="${pageContext.request.contextPath}/manage/edit">写文章</a></li>
                                     <li><a href="${pageContext.request.contextPath}/manage/logout.do">注销登录</a></li>
                                 </ul>
@@ -132,10 +132,10 @@
                         <c:forEach var="article" items="${articleList}">
 
                             <li class="one-third entry animate-box" data-animate-effect="fadeIn">
-                                <a href="/Article/${article.id}">
+                                <a href="${pageContext.request.contextPath}/Article/${article.id}">
                                     <c:if test="${empty article.cover}">
                                         <div class="entry-img w3layouts-main"
-                                             style="background-image: url(/res/images/img_5.jpg)">
+                                             style="background-image: url(${pageContext.request.contextPath}/res/images/img_5.jpg)">
 
                                         </div>
                                     </c:if>
@@ -162,7 +162,7 @@
                     <nav aria-label="Page navigation">
                         <ul class="pagination">
                             <li>
-                                <a href="/profile/${type}page=1&sort=<%=sort%>" aria-label="Previous">
+                                <a href="${pageContext.request.contextPath}/profile/${type}page=1&sort=<%=sort%>" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
@@ -187,11 +187,11 @@
                                     if (i == currentPage) {
                                         out.write("<li class=\"active\"><a href=\"/profile/" + user.getUserName()+ "?page=" + i + "&sort=" + sort + "\">" + i + "</a></li>");
                                     } else
-                                        out.write("<li><a href=\"/profile/" + user.getUserName()+ "?page=" + i + "&sort=" + sort + "\">" + i + "</a></li>");
+                                        out.write("<li><a href=\"" + request.getContextPath() + "/profile/" + user.getUserName()+ "?page=" + i + "&sort=" + sort + "\">" + i + "</a></li>");
                                 }
                             %>
                             <li>
-                                <a href="/profile/${user.userName}?page=<%=allPage%>&sort=<%=sort%>" aria-label="Next">
+                                <a href="${pageContext.request.contextPath}/profile/${user.userName}?page=<%=allPage%>&sort=<%=sort%>" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
@@ -214,13 +214,13 @@
                     <div class="col-md-4">
                         <div class="post-entry">
                             <div class="post-img">
-                                <a href="/Article/${popular.id}"><img
+                                <a href="${pageContext.request.contextPath}/Article/${popular.id}"><img
                                         src="${pageContext.request.contextPath}/userImg/ArticlePic?fileName=${popular.cover}"
                                         class="img-responsive" alt="Most Popular"></a>
                             </div>
                             <div class="post-copy">
                                 <h4><a href="/Article/${popular.id}">${popular.title}</a></h4>
-                                <a href="/Article/${popular.id}" class="post-meta"><span
+                                <a href="${pageContext.request.contextPath}/Article/${popular.id}" class="post-meta"><span
                                         class="date-posted">点击数：${popular.readCount}</span> </a>
                             </div>
                         </div>
