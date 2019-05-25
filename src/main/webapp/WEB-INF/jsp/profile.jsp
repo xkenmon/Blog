@@ -105,7 +105,7 @@
     </nav>
 
     <!-- 主页文章 -->
-    <header id="gtco-header" class="gtco-cover" role="banner" style="background-image:url(/res/images/img_1.jpg);"
+    <header id="gtco-header" class="gtco-cover" role="banner" style="background-image:url(${pageContext.request.contextPath}/res/images/img_1.jpg);"
             data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
@@ -219,7 +219,7 @@
                                         class="img-responsive" alt="Most Popular"></a>
                             </div>
                             <div class="post-copy">
-                                <h4><a href="/Article/${popular.id}">${popular.title}</a></h4>
+                                <h4><a href="${pageContext.request.contextPath}/Article/${popular.id}">${popular.title}</a></h4>
                                 <a href="${pageContext.request.contextPath}/Article/${popular.id}" class="post-meta"><span
                                         class="date-posted">点击数：${popular.readCount}</span> </a>
                             </div>

@@ -109,7 +109,7 @@
         </div>
     </nav>
 
-    <header id="gtco-header" class="gtco-cover" role="banner" style="background-image:url(/res/images/img_4.jpg);"
+    <header id="gtco-header" class="gtco-cover" role="banner" style="background-image:url(${pageContext.request.contextPath}/res/images/img_4.jpg);"
             data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">

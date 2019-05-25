@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xkenmon.blog.dao.ArticleMapper">
+
+    <resultMap id="ArticleMap" type="Article">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="type" jdbcType="CHAR" property="type"/>
+        <result column="title" jdbcType="CHAR" property="title"/>
+        <result column="date" jdbcType="TIMESTAMP" property="date"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="summary" jdbcType="VARCHAR" property="summary"/>
+        <result column="content" jdbcType="CLOB" property="content"/>
+        <result column="read_count" jdbcType="INTEGER" property="readCount"/>
+        <result column="author" jdbcType="VARCHAR" property="author"/>
+    </resultMap>
+
+    <sql id="simpleField">id
+    , title, author, date, summary, cover</sql>
+
+    <insert id="createArticle" parameterType="Article">
+        INSERT INTO articles (type, title, date, summary, content, read_count, author, cover)
+        VALUES (#{type}, #{title}, #{date}, #{summary}, #{content}, #{readCount}, #{author}, #{cover})
+    </insert>
+
+    <select id="findSimpleByOrderBySortBy" resultType="Article">
+        SELECT
+        <include refid="simpleField"/>
+        FROM blog.articles
+        WHERE ${_parameter.col} = #{val}
+        ORDER BY ${_parameter.order} ${_parameter.sort}
+    </select>
+
+    <select id="findSimpleOrderBySortBy" resultType="Article">
+        # SELECT id, title, author, date, summary, cover
+        SELECT
+        <include refid="simpleField"/>
+        FROM blog.articles
+        ORDER BY ${_parameter.order} ${_parameter.sort}
+    </select>
+
+    <select id="findSimpleBy" resultType="Article">
+        # SELECT id, title, author, date, summary, cover
+        SELECT
+        <include refid="simpleField"/>
+        FROM blog.articles
+        where ${_parameter.col} = #{val}
+    </select>
+
+    <select id="findById" resultType="Article" parameterType="int">
+        SELECT *
+        FROM articles
+        WHERE id = #{id}
+    </select>
+    <select id="findByTitle" resultType="Article">
+        SELECT *
+        FROM articles
+        WHERE title = #{title}
+    </select>
+
+    <delete id="deleteById">
+        DELETE
+        FROM articles
+        WHERE id = #{_parameter}
+    </delete>
+
+    <update id="updateReadCountById">
+        update articles
+        set read_count = read_count + 1
+        where id = #{id}
+    </update>
+
+    <update id="updateById" parameterType="cn.xkenmon.blog.vo.Article">
+        UPDATE articles
+        <set>
+            <if test="type != null and !&quot;&quot;.equals(type.trim())">type = #{type},</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="date != null">date = #{date},</if>
+            <if test="updateTime != null">update_time = #{updateTime},
+            </if>
+            <if test="summary != null">summary = #{summary},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="readCount != -1">read_count = #{readCount},</if>
+            <if test="cover != null">cover = #{cover},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <select id="queryCount" resultType="int">
+        SELECT COUNT(*)
+        FROM articles
+    </select>
+
+    <select id="queryCountByColumn" resultType="int">
+        SELECT COUNT(*)
+        FROM articles
+        WHERE ${_parameter.col} = #{type}
+    </select>
+
+    <!--    <select id="getTypeList" resultType="String">-->
+    <!--        SELECT type-->
+    <!--        FROM type-->
+    <!--    </select>-->
+    <select id="getTypeList" resultType="String">
+        select distinct(type)
+        from articles
+    </select>
+</mapper>

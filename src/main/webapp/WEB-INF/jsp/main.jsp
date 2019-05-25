@@ -108,7 +108,7 @@
                                 </a>
                                 <c:if test="${not empty currentUser}">
                                 <ul class="dropdown">
-                                    <li><a href="/profile/${currentUser.userName}">个人主页</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/profile/${currentUser.userName}">个人主页</a></li>
                                     <li><a href="${pageContext.request.contextPath}/manage/edit">写文章</a></li>
                                     <li><a href="${pageContext.request.contextPath}/manage/logout.do">注销登录</a></li>
                                 </ul>

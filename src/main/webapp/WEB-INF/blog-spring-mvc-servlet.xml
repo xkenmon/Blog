@@ -11,17 +11,14 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <!-- 本配置文件是工名为mvc-dispatcher的DispatcherServlet使用， 提供其相关的Spring MVC配置 -->
+    <!-- 本配置文件是供名为mvc-dispatcher的DispatcherServlet使用， 提供其相关的Spring MVC配置 -->
 
     <!-- 启用Spring基于annotation的DI, 使用户可以在Spring MVC中使用Spring的强大功能。 激活 @Required 
         @Autowired,JSR 250's @PostConstruct, @PreDestroy and @Resource 等标注 -->
     <mvc:annotation-driven/>
-    <context:component-scan base-package="cn.xkenmon.blog.control"/>
-    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
-    <mvc:resources mapping="/res/**" location="/res/"/>
-    <mvc:resources mapping="/static/**" location="/static/"/>
-    <mvc:resources mapping="/main.html" location="/WEB-INF/jsp/"/>
+    <context:component-scan base-package="cn.xkenmon.blog.controller"/>
 
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
@@ -31,13 +28,17 @@
         <property name="maxUploadSize" value="50000000"/>
     </bean>
 
+    <mvc:resources mapping="/res/**" location="/res/"/>
+    <mvc:resources mapping="/static/**" location="/static/"/>
+    <mvc:resources mapping="/main.html" location="/WEB-INF/jsp/"/>
+
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/manage/**"/>
             <mvc:exclude-mapping path="/manage/register.do"/>
             <mvc:exclude-mapping path="/manage/login.do"/>
             <mvc:exclude-mapping path="/manage/registerCheck"/>
-            <bean class="cn.xkenmon.blog.control.interceptor.LoginInterceptor"/>
+            <bean class="cn.xkenmon.blog.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
 
         <mvc:interceptor>
@@ -45,7 +46,7 @@
             <mvc:exclude-mapping path="/static/*/**"/>
             <mvc:exclude-mapping path="/res/**"/>
             <mvc:exclude-mapping path="/userImg/**"/>
-            <bean class="cn.xkenmon.blog.control.interceptor.ActionInterceptor"/>
+            <bean class="cn.xkenmon.blog.interceptor.ActionInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 

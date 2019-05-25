@@ -3,28 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <settings>
-        <setting name="logImpl" value="LOG4J"/>
-    </settings>
-    <environments default="development">
-        <environment id="development">
-            <transactionManager type="JDBC"/>
-            <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://127.0.0.1:3306/blog?characterEncoding=utf8&amp;useUnicode=true&amp;useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true"/>
-                <property name="username" value="blog"/>
-                <property name="password" value="000000"/>
-                <property name="poolPingEnabled" value="true"/>
-                <property name="poolPingQuery" value="select now()"/>
-                <property name="poolPingConnectionsNotUsedFor" value="3500000"/>
-            </dataSource>
-        </environment>
-    </environments>
+    <typeAliases>
+        <package name="cn.xkenmon.blog.vo"/>
+    </typeAliases>
     <mappers>
-        <mapper resource="mapper/ArticleMapper.xml"/>
-        <mapper resource="mapper/UserMapper.xml"/>
-        <mapper resource="mapper/ArticlePicMapper.xml"/>
+        <package name="cn.xkenmon.blog.dao"/>
     </mappers>
-
-
 </configuration>
