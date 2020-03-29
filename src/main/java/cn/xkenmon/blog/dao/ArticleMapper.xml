@@ -16,11 +16,11 @@
     </resultMap>
 
     <sql id="simpleField">id
-    , title, author, date, summary, cover</sql>
+    , title, author, date, summary, cover, read_count</sql>
 
     <insert id="createArticle" parameterType="Article">
         INSERT INTO articles (type, title, date, summary, content, read_count, author, cover)
-        VALUES (#{type}, #{title}, #{date}, #{summary}, #{content}, #{readCount}, #{author}, #{cover})
+        VALUES (#{article.type}, #{article.title}, #{article.date}, #{article.summary}, #{article.content}, #{article.readCount}, #{article.author}, #{article.cover})
     </insert>
 
     <select id="findSimpleByOrderBySortBy" resultType="Article">
@@ -61,7 +61,7 @@
     <delete id="deleteById">
         DELETE
         FROM articles
-        WHERE id = #{_parameter}
+        WHERE id = #{id}
     </delete>
 
     <update id="updateReadCountById">
@@ -73,15 +73,15 @@
     <update id="updateById" parameterType="cn.xkenmon.blog.vo.Article">
         UPDATE articles
         <set>
-            <if test="type != null and !&quot;&quot;.equals(type.trim())">type = #{type},</if>
-            <if test="title != null">title = #{title},</if>
-            <if test="date != null">date = #{date},</if>
-            <if test="updateTime != null">update_time = #{updateTime},
+            <if test="article.type != null and !&quot;&quot;.equals(article.type.trim())">type = #{article.type},</if>
+            <if test="article.title != null">title = #{article.title},</if>
+            <if test="article.date != null">date = #{article.date},</if>
+            <if test="article.updateTime != null">update_time = #{article.updateTime},
             </if>
-            <if test="summary != null">summary = #{summary},</if>
-            <if test="content != null">content = #{content},</if>
-            <if test="readCount != -1">read_count = #{readCount},</if>
-            <if test="cover != null">cover = #{cover},</if>
+            <if test="article.summary != null">summary = #{article.summary},</if>
+            <if test="article.content != null">content = #{article.content},</if>
+            <if test="article.readCount != -1">read_count = #{article.readCount},</if>
+            <if test="article.cover != null">cover = #{article.cover},</if>
         </set>
         WHERE id = #{id}
     </update>
@@ -94,7 +94,7 @@
     <select id="queryCountByColumn" resultType="int">
         SELECT COUNT(*)
         FROM articles
-        WHERE ${_parameter.col} = #{type}
+        WHERE ${col} = #{type}
     </select>
 
     <!--    <select id="getTypeList" resultType="String">-->

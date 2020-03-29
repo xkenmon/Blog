@@ -11,7 +11,7 @@ public class Article {
     private Date updateTime;
     private String summary;
     private String content;
-    private int readCount = -1;
+    private int readCount;
     private String author;
     private String cover;
     private String readTime;
