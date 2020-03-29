@@ -59,6 +59,12 @@
                                         <include>**/*.xml</include>
                                     </includes>
                                 </resource>
+                                <resource>
+                                    <directory>${basedir}/src/main/resources</directory>
+                                    <includes>
+                                        <include>*</include>
+                                    </includes>
+                                </resource>
                             </resources>
                         </configuration>
                     </execution>
@@ -81,12 +87,6 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>org.glassfish.extras</groupId>
-            <artifactId>glassfish-embedded-all</artifactId>
-            <version>3.0</version>
-            <scope>test</scope>
-        </dependency>
 
         <dependency>
             <groupId>junit</groupId>

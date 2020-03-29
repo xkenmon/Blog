@@ -26,7 +26,7 @@
     <select id="findSimpleByOrderBySortBy" resultType="Article">
         SELECT
         <include refid="simpleField"/>
-        FROM blog.articles
+        FROM articles
         WHERE ${_parameter.col} = #{val}
         ORDER BY ${_parameter.order} ${_parameter.sort}
     </select>
@@ -35,7 +35,7 @@
         # SELECT id, title, author, date, summary, cover
         SELECT
         <include refid="simpleField"/>
-        FROM blog.articles
+        FROM articles
         ORDER BY ${_parameter.order} ${_parameter.sort}
     </select>
 
@@ -43,7 +43,7 @@
         # SELECT id, title, author, date, summary, cover
         SELECT
         <include refid="simpleField"/>
-        FROM blog.articles
+        FROM articles
         where ${_parameter.col} = #{val}
     </select>
 
